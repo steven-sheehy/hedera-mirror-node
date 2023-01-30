@@ -5,7 +5,7 @@ go 1.17
 require (
 	github.com/coinbase/rosetta-sdk-go v0.7.3
 	github.com/cucumber/godog v0.12.4
-	github.com/go-playground/validator/v10 v10.10.0
+	github.com/go-playground/validator/v10 v10.11.2
 	github.com/hashgraph/hedera-protobufs-go v0.2.1-0.20220129033520-fdf6f206e34e
 	github.com/hashgraph/hedera-sdk-go/v2 v2.9.0
 	github.com/hellofresh/health-go/v4 v4.5.0
@@ -49,8 +49,8 @@ require (
 	github.com/fsnotify/fsnotify v1.5.1 // indirect
 	github.com/go-kit/kit v0.10.0 // indirect
 	github.com/go-logfmt/logfmt v0.5.0 // indirect
-	github.com/go-playground/locales v0.14.0 // indirect
-	github.com/go-playground/universal-translator v0.18.0 // indirect
+	github.com/go-playground/locales v0.14.1 // indirect
+	github.com/go-playground/universal-translator v0.18.1 // indirect
 	github.com/gofrs/uuid v4.0.0+incompatible // indirect
 	github.com/gogo/googleapis v1.1.0 // indirect
 	github.com/gogo/protobuf v1.3.2 // indirect
@@ -102,12 +102,12 @@ require (
 	go.opentelemetry.io/otel v1.0.0 // indirect
 	go.opentelemetry.io/otel/trace v1.0.0 // indirect
 	go.uber.org/atomic v1.7.0 // indirect
-	golang.org/x/crypto v0.0.0-20210921155107-089bfa567519 // indirect
-	golang.org/x/net v0.0.0-20211015210444-4f30a5c0130f // indirect
-	golang.org/x/sys v0.0.0-20220114195835-da31bd327af9 // indirect
-	golang.org/x/text v0.3.7 // indirect
+	golang.org/x/crypto v0.5.0 // indirect
+	golang.org/x/net v0.5.0 // indirect
+	golang.org/x/sys v0.4.0 // indirect
+	golang.org/x/text v0.6.0 // indirect
 	google.golang.org/genproto v0.0.0-20210602131652-f16073e35f0c // indirect
 	google.golang.org/grpc v1.44.0 // indirect
 	gopkg.in/ini.v1 v1.63.2 // indirect
-	gopkg.in/yaml.v3 v3.0.0-20210107192922-496545a6307b // indirect
+	gopkg.in/yaml.v3 v3.0.1 // indirect
 )
