@@ -3,7 +3,8 @@ module github.com/hashgraph/hedera-mirror-node/hedera-mirror-rosetta
 go 1.17
 
 require (
-	github.com/coinbase/rosetta-sdk-go v0.7.3
+	github.com/coinbase/rosetta-sdk-go v0.8.3
+	github.com/coinbase/rosetta-sdk-go/types v1.0.0
 	github.com/cucumber/godog v0.12.4
 	github.com/go-playground/validator/v10 v10.10.0
 	github.com/hashgraph/hedera-protobufs-go v0.2.1-0.20220129033520-fdf6f206e34e
@@ -11,7 +12,7 @@ require (
 	github.com/hellofresh/health-go/v4 v4.5.0
 	github.com/jackc/pgtype v1.10.0
 	github.com/lib/pq v1.10.4
-	github.com/mitchellh/mapstructure v1.4.3
+	github.com/mitchellh/mapstructure v1.5.0
 	github.com/onrik/gorm-logrus v0.3.0
 	github.com/ory/dockertest/v3 v3.8.1
 	github.com/pkg/errors v0.9.1
@@ -19,7 +20,7 @@ require (
 	github.com/sirupsen/logrus v1.8.1
 	github.com/spf13/pflag v1.0.5
 	github.com/spf13/viper v1.8.1
-	github.com/stretchr/testify v1.7.0
+	github.com/stretchr/testify v1.7.2
 	github.com/thanhpk/randstr v1.0.4
 	github.com/weaveworks/common v0.0.0-20210901124008-1fa3f9fa874c
 	google.golang.org/protobuf v1.26.1-0.20210525005349-febffdd88e85
@@ -33,18 +34,19 @@ require (
 	github.com/Microsoft/go-winio v0.5.1 // indirect
 	github.com/Nvveen/Gotty v0.0.0-20120604004816-cd527374f1e5 // indirect
 	github.com/beorn7/perks v1.0.1 // indirect
-	github.com/btcsuite/btcd v0.22.0-beta // indirect
+	github.com/btcsuite/btcd/btcec/v2 v2.2.0 // indirect
 	github.com/cenkalti/backoff/v4 v4.1.2 // indirect
 	github.com/cespare/xxhash/v2 v2.1.2 // indirect
 	github.com/containerd/continuity v0.0.0-20190827140505-75bee3e2ccb6 // indirect
 	github.com/cucumber/gherkin-go/v19 v19.0.3 // indirect
 	github.com/cucumber/messages-go/v16 v16.0.1 // indirect
 	github.com/davecgh/go-spew v1.1.1 // indirect
+	github.com/decred/dcrd/dcrec/secp256k1/v4 v4.0.1 // indirect
 	github.com/docker/cli v20.10.11+incompatible // indirect
 	github.com/docker/docker v20.10.7+incompatible // indirect
 	github.com/docker/go-connections v0.4.0 // indirect
 	github.com/docker/go-units v0.4.0 // indirect
-	github.com/ethereum/go-ethereum v1.10.15 // indirect
+	github.com/ethereum/go-ethereum v1.10.21 // indirect
 	github.com/felixge/httpsnoop v1.0.1 // indirect
 	github.com/fsnotify/fsnotify v1.5.1 // indirect
 	github.com/go-kit/kit v0.10.0 // indirect
@@ -103,11 +105,11 @@ require (
 	go.opentelemetry.io/otel/trace v1.0.0 // indirect
 	go.uber.org/atomic v1.7.0 // indirect
 	golang.org/x/crypto v0.0.0-20210921155107-089bfa567519 // indirect
-	golang.org/x/net v0.0.0-20211015210444-4f30a5c0130f // indirect
-	golang.org/x/sys v0.0.0-20220114195835-da31bd327af9 // indirect
+	golang.org/x/net v0.0.0-20220607020251-c690dde0001d // indirect
+	golang.org/x/sys v0.0.0-20220520151302-bc2c85ada10a // indirect
 	golang.org/x/text v0.3.7 // indirect
 	google.golang.org/genproto v0.0.0-20210602131652-f16073e35f0c // indirect
 	google.golang.org/grpc v1.44.0 // indirect
 	gopkg.in/ini.v1 v1.63.2 // indirect
-	gopkg.in/yaml.v3 v3.0.0-20210107192922-496545a6307b // indirect
+	gopkg.in/yaml.v3 v3.0.1 // indirect
 )
