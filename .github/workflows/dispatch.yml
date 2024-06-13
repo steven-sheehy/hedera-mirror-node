@@ -1,0 +1,47 @@
+name: promotion
+on:
+  repository_dispatch:
+    types:
+      - HelmRelease/mirror.integration
+
+#permissions:
+#  contents: write
+#  pull-requests: write
+
+jobs:
+  promote:
+    name: Promote
+    runs-on: ubuntu-latest
+    if: |
+      github.event.client_payload.metadata.env == 'integration' &&
+      github.event.client_payload.severity == 'info'
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@a5ac7e51b41094c92402da3b24376905380afc29 # v4.1.6
+        with:
+          fetch-depth: 0
+          ref: main
+
+      - name: Get chart version
+        run: |
+          VERSION=$(echo ${{ github.event.client_payload.metadata.revision }} | cut -d '@' -f1)
+          echo VERSION=${VERSION}
+
+#      - name: Set chart version in production
+#        id: production
+#        env:
+#          CHART_VERSION: ${{ steps.staging.outputs.version }}
+#        run: |
+#          echo "set chart version to ${CHART_VERSION}"
+#          yq eval '.spec.chart.spec.version=env(CHART_VERSION)' -i ./clusters/production/apps/demo.yaml
+
+#      - name: Open promotion PR
+#        uses: peter-evans/create-pull-request@v4
+#        with:
+#          branch: demo-promotion
+#          delete-branch: true
+#          token: ${{ secrets.GITHUB_TOKEN }}
+#          commit-message: Update demo to v${{ steps.staging.outputs.version }}
+#          title: Promote demo release to v${{ steps.staging.outputs.version }}
+#          body: |
+#            Promote demo release on production to v${{ steps.staging.outputs.version }}
