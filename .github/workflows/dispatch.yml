@@ -13,7 +13,7 @@ jobs:
     name: Promote
     runs-on: ubuntu-latest
     if: |
-      github.event.client_payload.metadata.env == 'integration' &&
+      github.event.client_payload.metadata.env == 'dev' &&
       github.event.client_payload.severity == 'info'
     steps:
       - name: Checkout Repository
