@@ -31,9 +31,7 @@ jobs:
         run: |
           PATH=${{ github.event.client_payload.metadata.path }}
           echo "Set chart version in ${PATH} to ${CHART_VERSION}"
-          wget https://github.com/mikefarah/yq/releases/latest/download/yq_linux_amd64 -O /usr/bin/yq
-          chmod +x /usr/bin/yq
-          yq eval '.spec.chart.spec.version=env(CHART_VERSION)' -i ./clusters/${PATH}/helmrelease.yaml
+          sed "s/version: .*/version: ${CHART_VERSION}/" clusters/${PATH}/helmrelease.yaml 
 
       - name: Open deployment PR
         uses: peter-evans/create-pull-request@6d6857d36972b65feb161a90e484f2984215f83e # v6.0.5
