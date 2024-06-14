@@ -1,47 +1,46 @@
-name: promotion
+name: Deploy
 on:
   repository_dispatch:
     types:
-      - HelmRelease/mirror.dev
+      - HelmRelease/mirror.*
 
-#permissions:
-#  contents: write
-#  pull-requests: write
+permissions:
+  contents: write
+  pull-requests: write
 
 jobs:
   promote:
-    name: Promote
+    name: Deploy
     runs-on: ubuntu-latest
-    if: |
-      github.event.client_payload.metadata.env == 'dev' &&
-      github.event.client_payload.severity == 'info'
+    if: github.event.client_payload.severity == 'info'
     steps:
       - name: Checkout Repository
         uses: actions/checkout@a5ac7e51b41094c92402da3b24376905380afc29 # v4.1.6
         with:
           fetch-depth: 0
-          ref: main
+          ref: deploy
 
       - name: Get chart version
+        id: release
         run: |
-          VERSION=$(echo ${{ github.event.client_payload.metadata.revision }} | cut -d '+' -f1)
-          echo VERSION=${VERSION}
+          echo "${{ github.event_name }}"
+          echo VERSION=$(echo ${{ github.event.client_payload.metadata.revision }} | cut -d '+' -f1) >> $GITHUB_OUTPUT
 
-#      - name: Set chart version in production
-#        id: production
-#        env:
-#          CHART_VERSION: ${{ steps.staging.outputs.version }}
-#        run: |
-#          echo "set chart version to ${CHART_VERSION}"
-#          yq eval '.spec.chart.spec.version=env(CHART_VERSION)' -i ./clusters/production/apps/demo.yaml
+      - name: Set chart version in HelmRelease
+        env:
+          CHART_VERSION: ${{ steps.release.outputs.version }}
+        run: |
+          PATH=${{ github.event.client_payload.metadata.path }}
+          echo "Set chart version in ${PATH} to ${CHART_VERSION}"
+          yq eval '.spec.chart.spec.version=env(CHART_VERSION)' -i ./clusters/${PATH}/helmrelease.yaml
 
-#      - name: Open promotion PR
-#        uses: peter-evans/create-pull-request@v4
-#        with:
-#          branch: demo-promotion
-#          delete-branch: true
-#          token: ${{ secrets.GITHUB_TOKEN }}
-#          commit-message: Update demo to v${{ steps.staging.outputs.version }}
-#          title: Promote demo release to v${{ steps.staging.outputs.version }}
-#          body: |
-#            Promote demo release on production to v${{ steps.staging.outputs.version }}
+      - name: Open deployment PR
+        uses: peter-evans/create-pull-request@6d6857d36972b65feb161a90e484f2984215f83e # v6.0.5
+        with:
+          body: Deploy v${{ steps.release.outputs.version }} to ${{ github.event.client_payload.metadata.path }}
+          branch: deploy-${{ github.event.client_payload.metadata.path }}-${{ steps.release.outputs.version }}
+          commit-message: Deploy v${{ steps.release.outputs.version }} to ${{ github.event.client_payload.metadata.path }}
+          delete-branch: true
+          signoff: true
+          title: Deploy v${{ steps.release.outputs.version }} to ${{ github.event.client_payload.metadata.path }}
+          token: ${{ secrets.GITHUB_TOKEN }}
