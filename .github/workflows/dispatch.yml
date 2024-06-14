@@ -24,7 +24,7 @@ jobs:
 
       - name: Get chart version
         run: |
-          VERSION=$(echo ${{ github.event.client_payload.metadata.revision }} | cut -d '@' -f1)
+          VERSION=$(echo ${{ github.event.client_payload.metadata.revision }} | cut -d '+' -f1)
           echo VERSION=${VERSION}
 
 #      - name: Set chart version in production
