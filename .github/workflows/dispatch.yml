@@ -31,7 +31,7 @@ jobs:
         run: |
           PATH=${{ github.event.client_payload.metadata.path }}
           echo "Set chart version in ${PATH} to ${CHART_VERSION}"
-          sed "s/version: .*/version: ${CHART_VERSION}/" clusters/${PATH}/helmrelease.yaml 
+          sed -i "s/version: .*/version: ${CHART_VERSION}/" clusters/${PATH}/helmrelease.yaml 
 
       - name: Open deployment PR
         uses: peter-evans/create-pull-request@6d6857d36972b65feb161a90e484f2984215f83e # v6.0.5
