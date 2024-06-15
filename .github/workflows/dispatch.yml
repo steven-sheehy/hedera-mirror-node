@@ -23,24 +23,22 @@ jobs:
       - name: Get chart version
         id: release
         run: |
-          echo VERSION=$(echo ${{ github.event.client_payload.metadata.revision }} | cut -d '+' -f1) >> $GITHUB_OUTPUT
+          VERSION=$(echo ${{ github.event.client_payload.metadata.revision }} | cut -d '+' -f1)
+          echo VERSION=${VERSION} >> $GITHUB_OUTPUT
 
       - name: Set chart version in HelmRelease
         env:
           CHART_PATH: ${{ github.event.client_payload.metadata.path }}
           CHART_VERSION: ${{ steps.release.outputs.version }}
         run: |
-          echo "Set chart version in ${CHART_PATH} to ${CHART_VERSION}"
-          whereis yq || true
-          which yq || true
-          info yq || true
+          echo "Set HelmRelease ${CHART_PATH} to ${CHART_VERSION}"
           yq eval '.spec.chart.spec.version=env(CHART_VERSION)' -i ./clusters/${CHART_PATH}/helmrelease.yaml
 
       - name: Open deployment PR
         uses: peter-evans/create-pull-request@6d6857d36972b65feb161a90e484f2984215f83e # v6.0.5
         with:
           body: Deploy v${{ steps.release.outputs.version }} to ${{ github.event.client_payload.metadata.path }}
-          branch: deploy-${{ github.event.client_payload.metadata.path }}-${{ steps.release.outputs.version }}
+          branch: deploy/${{ github.event.client_payload.metadata.path }}/${{ steps.release.outputs.version }}
           commit-message: Deploy v${{ steps.release.outputs.version }} to ${{ github.event.client_payload.metadata.path }}
           delete-branch: true
           signoff: true
