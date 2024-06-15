@@ -38,7 +38,7 @@ jobs:
         uses: peter-evans/create-pull-request@6d6857d36972b65feb161a90e484f2984215f83e # v6.0.5
         with:
           body: Deploy v${{ steps.release.outputs.version }} to ${{ github.event.client_payload.metadata.path }}
-          branch: deploy/${{ github.event.client_payload.metadata.path }}/${{ steps.release.outputs.version }}
+          branch: deploy-${{ github.event.client_payload.metadata.path }}-${{ steps.release.outputs.version }}
           commit-message: Deploy v${{ steps.release.outputs.version }} to ${{ github.event.client_payload.metadata.path }}
           delete-branch: true
           signoff: true
